@@ -11,6 +11,13 @@ const Grid = ()=>{
 
     const dispatch = useDispatch();
 
+    useEffect ((url) => {
+        const obtenerDetalles = () => {
+            dispatch(obtenerDetallePokemonAccion(url));
+        }
+        obtenerDetalles()
+    }, [dispatch])
+
     const pokemones = useSelector(store => store.pokemones.results);
     const next = useSelector(store => store.pokemones.next);
     const previous = useSelector(store => store.pokemones.previous);
@@ -21,7 +28,9 @@ const Grid = ()=>{
             {
                  pokemones.length === 0 ? <button className="btn btn-dark" onClick={ ()=> dispatch(obtenerPokemonesAccion()) }>Obtener pokemones</button> : null
             }
+            
             <div className="row row-cols-3">
+            
             {
                 pokemones.map(item => (
                     <div className="col text-center" key={item.url}>
@@ -35,8 +44,7 @@ const Grid = ()=>{
             </div>
 
             <div className="col-md-6">
-            
-                
+                  
                 <ul className="lista-pokemones list-group mt-3 text-capitalize">
                     
                 </ul>
